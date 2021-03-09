@@ -1,0 +1,55 @@
+{
+  "name": "todo-back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test sequelize db:migrate:undo:all && npm run db:migrate:test && npm run db:migrate:seed:test && NODE_ENV=test nyc --reporter=html --reporter=lcov mocha --require @babel/register ./server/tests/* --exit",
+    "start": "NODE_ENV=production node ./build/index.js",
+    "dev": "nodemon --require @babel/register ./server/index.js",
+    "build": "rm -rf build && babel -d ./build ./server -s",
+    "db:migrate": "./node_modules/.bin/sequelize db:migrate",
+    "db:seed": "./node_modules/.bin/sequelize db:seed:all",
+    "db:seed:undo": "./node_modules/.bin/sequelize db:seed:undo:all",
+    "db:migrate:undo:all": "./node_modules/.bin/sequelize db:migrate:undo:all",
+    "db:migrate:test": "NODE_ENV=test ./node_modules/.bin/sequelize db:migrate",
+    "db:migrate:seed:test": "NODE_ENV=test ./node_modules/.bin/sequelize db:seed:all",
+    "db:migrate:undo:all:test": "NODE_ENV=test ./node_modules/.bin/sequelize db:migrate:undo:all",
+    "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov > ./coverage/coverage.lcov && codecov",
+    "db:create": "NODE_ENV=test ./node_modules/.bin/sequelize db:create"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kasulejoseph/todo-back.git"
+  },
+  "author": "kasule joseph",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kasulejoseph/todo-back/issues"
+  },
+  "homepage": "https://github.com/Kasulejoseph/todo-back#readme",
+  "dependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.8",
+    "@babel/node": "^7.13.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
+    "@babel/register": "^7.13.8",
+    "babel-preset-env": "^1.7.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.10.0",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.5.0",
+    "sequelize-cli": "^6.2.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.3.0",
+    "nodemon": "^2.0.7",
+    "nyc": "^15.1.0"
+  }
+}
